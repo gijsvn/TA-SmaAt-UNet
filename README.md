@@ -10,6 +10,14 @@ The main model can be found in:
 models/TA_SmaAt_UNet/
 ```
 
+<p align="center">
+  <img src="assets/ta_smaat_unet_architecture.png" width="850">
+</p>
+
+<p align="center">
+  <em>TA-SmaAt-UNet extends SmaAt-UNet with lightweight temporal conditioning layers based on time-of-day and time-of-year encodings.</em>
+</p>
+
 ## Overview
 
 The default nowcasting task is:
