@@ -15,7 +15,7 @@ models/TA_SmaAt_UNet/
 </p>
 
 <p align="center">
-  <em>TA-SmaAt-UNet extends SmaAt-UNet with lightweight temporal conditioning layers based on time-of-day and time-of-year encodings.</em>
+  <em>Schematic overview of TA-SmaAt-UNet architecture.</em>
 </p>
 
 ## Overview
