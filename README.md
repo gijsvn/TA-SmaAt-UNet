@@ -11,7 +11,7 @@ models/TA_SmaAt_UNet/
 ```
 
 <p align="center">
-  <img src="assets/ta_smaat_unet_architecture.png" width="850">
+  <img src="assets/TA-SmaAt-UNet topology.png" width="850">
 </p>
 
 <p align="center">
