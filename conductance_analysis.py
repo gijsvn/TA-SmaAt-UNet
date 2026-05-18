@@ -344,6 +344,7 @@ def build_model(config: AnalysisConfig, device: torch.device) -> LightningBaseMo
         checkpoint_path=config.checkpoint,
         backbone=backbone,
         strict=True,
+        weights_only=False
     )
     return model.to(device).eval()
 
@@ -421,7 +422,7 @@ def parameter_group_fractions(counts: Mapping[str, int]) -> Dict[str, float]:
 
 
 def infer_n_leads(model: LightningBaseModel, dataset: Any, device: torch.device) -> int:
-    x, _, t, _ = dataset[0]
+    (x, t), y = dataset[0]
     x = x.unsqueeze(0).to(device)
     t = t.unsqueeze(0).to(device)
     with torch.no_grad():
@@ -451,7 +452,7 @@ def sample_temporal_baselines(
     baselines: List[torch.Tensor] = []
     vectors: List[List[float]] = []
     for idx in indices:
-        _, _, t, _ = train_ds[idx]
+        (x, t), y = train_ds[idx]
         baselines.append(t.unsqueeze(0).to(device))
         vectors.append([float(v) for v in t.tolist()])
     return baselines, indices, vectors
@@ -648,7 +649,7 @@ def run_analysis(config: AnalysisConfig) -> None:
     component_rows: List[Dict[str, Any]] = []
 
     for sample_idx in tqdm(sample_indices, desc="Samples"):
-        x, y, t, _ = dataset[sample_idx]
+        (x, t), y = dataset[sample_idx]
         x = x.unsqueeze(0).to(device)
         y = y.unsqueeze(0).to(device)
         t = t.unsqueeze(0).to(device)
