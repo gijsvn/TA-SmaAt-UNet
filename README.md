@@ -83,7 +83,7 @@ For GPU training, install a PyTorch build matching your CUDA version. The script
 
 ## Data
 
-The datasets used in for model training and evaluation in the paper were created by filtering an unprocessed dataset of precipitation maps of the Netherlands and surrounding areas. This unprocessed dataset contains precipitation maps from 2016 to 2019 at 5-minute intervals, resulting in about 420,000 images. This dataset is available upon request (s.mehrkanoon@uu.nl) and can be adapted to the task formulation of the paper by processing it using `create_datasets.py`. 
+The datasets used in for model training and evaluation in the paper were created by filtering an unprocessed dataset of precipitation maps of the Netherlands and surrounding areas. This unfiltered dataset contains precipitation maps from 2016 to 2019 at 5-minute intervals, resulting in about 420,000 images, where pixel values contain precipitation intensities in normalized units, which can be converted back to the original mm/5min by scaling by 47.83. This dataset is available upon request (s.mehrkanoon@uu.nl) and can be adapted to the task formulation of the paper by processing it using `create_datasets.py`. 
 
 The dataset created by `create_datasets.py` is compatible with `util.load_dataset.PrecipitationDataModule`, and can thus be used to call subsequent scripts:
 
