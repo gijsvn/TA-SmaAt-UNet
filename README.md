@@ -32,6 +32,7 @@ The repository contains scripts for training, evaluation, persistence baselines,
 
 | Script | Description |
 | --- | --- |
+| `create_datasets.py` | Generate filtered datasets as used in the paper. |
 | `train.py` | Train `SmaAt-UNet` or `TA-SmaAt-UNet`. |
 | `eval.py` | Evaluate a trained model. |
 | `eval_persistence.py` | Evaluate the persistence baseline. |
@@ -42,6 +43,10 @@ The repository contains scripts for training, evaluation, persistence baselines,
 
 ```text
 .
+├── checkpoints/
+│   └── paper/
+│       └── TA-SmaAt-UNet/
+│           └── model.ckpt     # Pre-trained TA-SmaAt-UNet weights used in paper
 ├── models/
 │   ├── SmaAt_UNet/            # SmaAt-UNet implementation
 │   ├── TA_SmaAt_UNet/         # Proposed time-aware model
@@ -51,6 +56,7 @@ The repository contains scripts for training, evaluation, persistence baselines,
 │   ├── evaluate_model.py
 │   ├── load_dataset.py
 │   └── visualization.py
+├── create_datasets.py
 ├── train.py
 ├── eval.py
 ├── eval_persistence.py
@@ -77,9 +83,15 @@ For GPU training, install a PyTorch build matching your CUDA version. The script
 
 ## Data
 
-The dataset is not included in this repository. The scripts expect an HDF5 file readable by `util/load_dataset.py`.
+The datasets used in for model training and evaluation in the paper were created by filtering an unprocessed dataset of precipitation maps of the Netherlands and surrounding areas. This unprocessed dataset contains precipitation maps from 2016 to 2019 at 5-minute intervals, resulting in about 420,000 images. This dataset is available upon request (s.mehrkanoon@uu.nl) and can be adapted to the task formulation of the paper by processing it using `create_datasets.py`. 
 
-Expected structure:
+The dataset created by `create_datasets.py` is compatible with `util.load_dataset.PrecipitationDataModule`, and can thus be used to call subsequent scripts:
+
+```bash
+--data-file data/precipitation_dataset.h5
+```
+
+The structure of the created dataset is:
 
 ```text
 precipitation_dataset.h5
@@ -116,6 +128,15 @@ y: [12, H, W]     target precipitation maps
 Validation data is sampled from the `train` group by `PrecipitationDataModule`; the `test` group is used only for testing. The default validation fraction is 0.1 and the split is stratified over the annual cycle using the temporal vectors.
 
 In the paper, the experiments use KNMI radar precipitation maps over the Netherlands from 2016 to 2019, with 2016-2018 used for training and 2019 used for testing.
+
+## Pretrained paper checkpoints
+
+The trained TA-SmaAt-UNet weights used for the paper results are provided in `checkpoints/paper/TA-SmaAt-UNet`.
+
+```text
+checkpoints/paper/TA-SmaAt-UNet
+└── model.ckpt
+```
 
 ## Training
 
