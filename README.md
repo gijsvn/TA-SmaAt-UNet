@@ -2,7 +2,7 @@
 
 Code for the paper **"Temporal Context Conditioning for Seasonality-Aware Precipitation Nowcasting"** by Gijs van Nieuwkoop and Siamak Mehrkanoon.
 
-This repository implements **TA-SmaAt-UNet**, a time-aware extension of SmaAt-UNet for radar-based precipitation nowcasting. The model uses the recent precipitation sequence together with a compact temporal feature vector containing cyclical encodings of time-of-day and time-of-year. These features are injected through lightweight temporal conditioning layers in the SmaAt-UNet encoder-decoder architecture
+This repository implements **TA-SmaAt-UNet**, a time-aware extension of SmaAt-UNet for radar-based precipitation nowcasting. The model uses the recent precipitation sequence together with a compact temporal feature vector containing cyclical encodings of time-of-day and time-of-year. These features are injected through lightweight temporal conditioning layers in the SmaAt-UNet encoder-decoder architecture.
 
 The main model can be found in:
 
