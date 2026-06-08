@@ -51,10 +51,11 @@ def timestamp_to_vector(timestamp: str) -> torch.Tensor:
 
     # --- day-of-year ---
     doy = _day_of_year(day, month, year)
+    n_y = 366 if _is_leap(year) else 365
 
     # --- angles ---
     tod_angle = 2.0 * math.pi * tod
-    toy_angle = 2.0 * math.pi * (doy / 365.0)  # you can use 365.2422 if you want
+    toy_angle = 2.0 * math.pi * (doy / n_y)
 
     tod_sin = math.sin(tod_angle)
     tod_cos = math.cos(tod_angle)
